@@ -1,0 +1,86 @@
+import cv2
+import numpy as np
+# Reading color image
+img = cv2.imread('MyPic.png')
+print('shape of Mypic :',img.shape)
+cv2.imwrite('MyPic.jpg', img)
+cv2.imshow('My Pic ',img)
+cv2.waitKey(0) & 0xFF
+cv2.destroyAllWindows()
+
+grayImage = cv2.imread('MyPic.png', 0)
+cv2.imwrite('MyPicGray.png', grayImage)
+cv2.imshow('My Pic ',grayImage)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+# Load an color image in grayscale
+mg = cv2.imread('messi5.jpg',0)
+cv2.imshow('image',mg)
+print('Shape of messi5.jpg',mg.shape)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+print('Total no of pixels in messi5.jpg :',mg.size)
+print('Type of messi5.jpg :',mg.dtype)
+#Converting between an image and raw bytes
+byteArray= np.array(mg)
+print('Array shape of messi5.jpg  :',byteArray.shape)
+print('Pixel at x y location :',byteArray[100,210])
+# Separate the clor layers
+
+b,g,r = cv2.split(img)
+img = cv2.imread("MyPic.jpg")
+b = img[:,:,0]
+g = img[:,:,1]
+r = img[:,:,2]
+cv2.imshow('Blue color ',b)
+cv2.waitKey(0) & 0xFF
+cv2.imshow('Green color ',g)
+cv2.waitKey(0) & 0xFF
+cv2.imshow('Red color ',g)
+cv2.waitKey(0) & 0xFF
+cv2.destroyAllWindows()
+# Merge b,g,r
+
+rrg = cv2.merge((b,g,r))
+cv2.imshow('Merged image ',rrg)
+cv2.waitKey(0) & 0xFF
+cv2.destroyAllWindows()
+
+#Below program loads an image in grayscale, displays it, save the image
+# if you press ‘s’ and exit, or simply exit without saving if you press ESC key.
+img = cv2.imread('messi5.jpg',0)
+print('ESC or s ')
+cv2.imshow('gray messi5.jpg',img)
+k = cv2.waitKey(0)
+if k == 27:         # wait for ESC key to exit
+    cv2.destroyAllWindows()
+elif k == ord('s'): # wait for 's' key to save and exit
+    cv2.imwrite('messigray.png',img)
+    cv2.destroyAllWindows()
+#------------------------------------------
+# Reading color image
+img = cv2.imread('messi5.jpg',1)
+cv2.imshow('color messi5.jpg',img)
+
+px = img[100,100]
+print('px  :',px)
+
+
+# accessing only blue pixel
+blue = img[100,100,0]
+green = img[100,100,1]
+red = img[100,100,2]
+print('Only Blue pixel :',blue)
+print('Only Green pixel :',green)
+print('Only Red pixel :',red)
+cv2.waitKey(0) & 0xFF
+cv2.destroyAllWindows()
+# ROI
+ball = img[280:340, 330:390]
+img[273:333, 100:160] = ball
+
+cv2.imshow('color image messi5.jpg with ball',img)
+
+cv2.waitKey(0) & 0xFF
+cv2.destroyAllWindows()
+
